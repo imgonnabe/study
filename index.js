@@ -1,30 +1,32 @@
-
 // scope 를 보장받기위해 즉시실행함수를 사용한다.
 
-(function ($) {
+;(function ($) {
+  $(function () {
+    // onload event
 
-    $(function () {
-        // onload event
+    // $.alert('hello world')
+    // .then(() => {
+    //     alert('close or ok')
+    // })
 
-        // $.alert('hello world')
-        // .then(() => {
-        //     alert('close or ok')
-        // })
+    $.confirm('확인 또는 취소').then((result) => {
+      if (result) alert('확인')
+      else alert('취소')
+    })
+    // 사용자가 확인, 닫는경우 콜백을 받고싶다.
+    // (1) Promise (2) function 파라미터
 
-        $.confirm('확인 또는 취소')
-        .then((result) => {
-            if(result) alert('확인')
-            else alert('취소')
-        })        
-        // 사용자가 확인, 닫는경우 콜백을 받고싶다.
-        // (1) Promise (2) function 파라미터
-        
-        // $.static();
-        // $('h1').instance();
-        $('#only-number').onInputOnlyNumber()
-    })  
+    // $.static();
+    // $('h1').instance();
+    $('#only-number').onInputOnlyNumber()
 
-
-
-
-})(jQuery);
+    var $time = $('#current-time') // jquery element
+    var interval = setInterval(() => {
+      $time.text(dayjs().format('YYYY-MM-DD hh:mm:ss'))
+      console.log('hello!')
+    }, 1000) // 1초마다 수행
+    setTimeout(() => {
+      clearInterval(interval)
+    }, 10000)
+  })
+})(jQuery)
